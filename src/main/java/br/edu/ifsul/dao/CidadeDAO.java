@@ -18,6 +18,15 @@ public class CidadeDAO<TIPO> extends DAOGenerico<Cidade> implements Serializable
     public CidadeDAO(){
         super();
         classePersistente = Cidade.class;
+        //lista ordenações possiveis
+        listaOrdem.add(new Ordem("id", "ID", "="));
+        listaOrdem.add(new Ordem("nome", "Nome", "like"));
+        listaOrdem.add(new Ordem("pais", "País", "like"));
+        //ordemAtual
+        ordemAtual = listaOrdem.get(1);
+        // inicicalizar o conversor de ordem com a lista de ordens
+        converterOrdem = new ConverterOrdem();
+        converterOrdem.setListaOrdem(listaOrdem);
     }
 
     
