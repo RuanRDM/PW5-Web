@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dadosAeroportos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ec1f6b0c-b17f-4f85-a688-6512b8752d4c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dadosAeroportos.xml"/>
+	<style name="zebra">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#BABABA"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="cidade" class="br.edu.ifsul.modelo.Cidade">
+		<fieldDescription><![CDATA[cidade]]></fieldDescription>
+	</field>
+	<field name="operacaoNoturna" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[operacaoNoturna]]></fieldDescription>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[nome]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="97" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="97" backcolor="#E00804" uuid="75bd794c-4431-4260-b5a3-37a420395fe0"/>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="560" height="96" uuid="b49c066e-7741-45b2-a3e4-51b13ceb660d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Relatório Aeroportos"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="30" backcolor="#F59905" uuid="005a2f5e-41cb-4509-a4d9-84ea6e3ce007"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="30" uuid="6cdc4305-49c6-4440-944c-d79a3f9f3a56">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1460bd41-0539-4330-900e-0bae6ab022d7"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<text><![CDATA[Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="30" uuid="1840139c-f7b1-46ce-afef-697b273b8661">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2b82e31d-5929-4be3-89a5-4d6cc1ac860f"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="30" uuid="86e1b3eb-fb0f-4fc2-9f4b-8602c3674c7c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="976ff5ab-8377-40e5-b5e1-f7228d888760"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<text><![CDATA[Operação Noturna]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="30" uuid="7ac45403-65ea-401d-b90a-6bd7b5c7b836">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b4b142df-35e3-48e7-aa7d-d8ff6ce74633"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<text><![CDATA[Cidade]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<rectangle>
+				<reportElement style="zebra" isPrintRepeatedValues="false" x="0" y="0" width="555" height="30" uuid="8f47fe6a-4a07-412d-8d5d-e93c87073104"/>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="30" uuid="afab4d0b-524c-4a98-900f-1e2e04893d51">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1460bd41-0539-4330-900e-0bae6ab022d7"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="30" uuid="0c54cdb0-24c6-4f66-8437-1c37879f8db4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2b82e31d-5929-4be3-89a5-4d6cc1ac860f"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="30" uuid="a358927b-02ba-4730-b75f-1f6a1e345a75">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="976ff5ab-8377-40e5-b5e1-f7228d888760"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{operacaoNoturna}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="30" uuid="34c450a8-2e8f-460a-aa0b-240d5e5c2eae">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b4b142df-35e3-48e7-aa7d-d8ff6ce74633"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{cidade}.getNome()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="54" uuid="f11b085c-0bee-4233-bc7d-adff9c41f3a2"/>
+			</rectangle>
+			<textField>
+				<reportElement x="355" y="24" width="100" height="30" uuid="cb99f008-bd18-4a8c-998b-48117093927c"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="455" y="24" width="100" height="30" uuid="bf99e58d-40a6-40e3-9934-ce8d15684336"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="255" y="24" width="100" height="30" uuid="4b64b4b6-d569-4ac9-bdcd-776b92df67c6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
