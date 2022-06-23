@@ -17,7 +17,7 @@
                  icon="pi pi-home" />
                 <p:submenu label="Cadastros">
                     <p:column>
-                        <p:submenu label="CRUD's">
+                        <p:submenu label="CRUD's Básicos">
                             <p:menuitem action="#{controleClasse.listar()}"
                                         value="Manutenção de Classes"
                                         ajax="false" />
@@ -29,6 +29,11 @@
                                         ajax="false" />
                             <p:menuitem action="#{controleAeroporto.listar()}"
                                         value="Manutenção de Aeroportos"
+                                        ajax="false" />
+                        </p:submenu>
+                        <p:submenu label="CRUD's Avançados">
+                            <p:menuitem action="#{controleVoo.listar()}"
+                                        value="Manutenção de Voos"
                                         ajax="false" />
                         </p:submenu>
                     </p:column>

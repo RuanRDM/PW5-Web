@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/template.xhtml">
+        <ui:define name="titulo">CRUD de Voos</ui:define>
+        <ui:define name="conteudo">
+            <h:form id="formListagem" prependId="false">
+                <p:growl/>
+                <p:commandButton value="Novo" actionListener="#{controleVoo.novo()}"
+                                 icon="pi pi-plus"
+                                 update="formEdicao"
+                                 process="@this"
+                                 oncomplete="PF('dlg').show();"/>
+                <div>
+                    <p:panelGrid columns="11">
+                        <p:outputLabel value="Ordem: "/>
+                        <p:selectOneMenu value="#{controleVoo.dao.ordemAtual}"
+                                         converter="#{controleVoo.dao.converterOrdem}">
+                            <f:selectItems value="#{controleVoo.dao.listaOrdem}"
+                                           var="ord" itemValue="#{ord.atributo}" />
+                            <p:ajax update="listagem" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Filtro" />
+                        <p:inputText value="#{controleVoo.dao.filtro}">
+                            <p:ajax update="listagem" event="blur" />
+                        </p:inputText>
+                        <p:commandButton value="Filtrar" update="listagem" />
+                        <p:outputLabel value="Máximo de objetos: "/>
+                        <p:selectOneMenu value="#{controleVoo.dao.maximoObjetos}">
+                            <f:selectItem itemLabel="5" itemValue="5" />
+                            <f:selectItem itemLabel="10" itemValue="10" />
+                            <f:selectItem itemLabel="25" itemValue="25" />
+                            <f:selectItem itemLabel="50" itemValue="50" />
+                            <f:selectItem itemLabel="100" itemValue="100" />
+                            <p:ajax update="listagem" />
+                        </p:selectOneMenu>
+                        <p:commandButton action="#{controleVoo.dao.primeiro()}" title="Primeiro" update="listagem" icon="pi pi-step-backward"/>
+                        <p:commandButton action="#{controleVoo.dao.anterior()}" title="Anterior" update="listagem" icon="pi pi-chevron-left" />
+                        <p:commandButton action="#{controleVoo.dao.proximo()}" title="Próximo" update="listagem" icon="pi pi-chevron-right" />
+                        <p:commandButton action="#{controleVoo.dao.ultimo()}" title="Último" update="listagem" icon="pi pi-step-forward"/>
+                    </p:panelGrid>
+                </div>
+                <p:dataTable value="#{controleVoo.dao.listaObjetos}" var="obj"
+                             id="listagem">
+                    <f:facet name="footer">
+                        <p:outputLabel value="#{controleVoo.dao.mensagemNavegacao}"/>
+                    </f:facet>
+                    <p:column headerText="ID">
+                        <p:outputLabel value="#{obj.id}"/>
+                    </p:column>
+                    <p:column headerText="Descrição">
+                        <p:outputLabel value="#{obj.descricao}"/>
+                    </p:column>
+                    <p:column headerText="Escalas">
+                        <p:outputLabel value="#{obj.escalas.nome}"/>
+                    </p:column>
+                    <p:column headerText="Ativo">
+                        <p:outputLabel value="#{obj.ativo}"/>
+                    </p:column>
+                    <p:column headerText="Ações">
+                        <div>
+                            <p:commandButton 
+                                actionListener="#{controleVoo.alterar(obj.id)}"
+                                icon="pi pi-pencil"
+                                title="Editar o objeto de id: #{obj.id}"
+                                update="formEdicao" process="@this"
+                                oncomplete="PF('dlg').show();"/>
+                            <p:commandButton
+                                actionListener="#{controleVoo.excluir(obj.id)}"
+                                icon="pi pi-trash"
+                                update="@form"
+                                process="@this"
+                                title="Remover o objeto de id: #{obj.id}"
+                                onclick="if (!confirm('Deseja remover o objeto de id: #{obj.id}'))
+                                            return false"
+                                />
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+            <ui:include src="formulario.xhtml"/>
+        </ui:define>
+    </ui:composition>
+</html>
