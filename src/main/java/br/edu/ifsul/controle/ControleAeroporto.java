@@ -14,6 +14,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import br.edu.ifsul.util.Util;
 import br.edu.ifsul.modelo.Cidade;
+import br.edu.ifsul.util.UtilRelatorios;
+import java.util.HashMap;
 
 
 /**
@@ -31,6 +33,11 @@ public class ControleAeroporto implements Serializable{
 
     public ControleAeroporto() {
 
+    }
+    
+    public void imprimeAeroportos(){
+        HashMap parametros = new HashMap();
+        UtilRelatorios.imprimeRelatorio("dadosAeroportos", parametros, dao.getListaTodos());
     }
 
     public String listar() {

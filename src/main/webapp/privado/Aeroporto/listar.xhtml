@@ -15,6 +15,11 @@
                                  update="formEdicao"
                                  process="@this"
                                  oncomplete="PF('dlg').show();"/>
+                <p:commandButton value="Imprimir"
+                                 icon="pi pi-print"
+                                 action="#{controleAeroporto.imprimeAeroportos()}"
+                                 ajax="false"
+                                 onclick="this.form.target= '_blank';"/>
                 <div>
                     <p:panelGrid columns="11">
                         <p:outputLabel value="Ordem: "/>

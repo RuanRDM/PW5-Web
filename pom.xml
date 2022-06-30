@@ -24,45 +24,50 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-<groupId>org.hibernate</groupId>
-<artifactId>hibernate-agroal</artifactId>
-<version>5.3.8.Final</version>
-<type>pom</type>
-</dependency>
-<dependency>
-<groupId>org.apache.commons</groupId>
-<artifactId>commons-collections4</artifactId>
-<version>4.1</version>
-</dependency>
-<!--  hibernate validator  -->
-<dependency>
-<groupId>org.hibernate.validator</groupId>
-<artifactId>hibernate-validator</artifactId>
-<version>6.1.0.Final</version>
-</dependency>
-<!--  Driver Postgresql  -->
-<dependency>
-<groupId>org.postgresql</groupId>
-<artifactId>postgresql</artifactId>
-<version>42.3.0</version>
-</dependency>
-<dependency>
-<groupId>org.primefaces</groupId>
-<artifactId>primefaces</artifactId>
-<version>10.0.0</version>
-</dependency>
-<dependency>
-<groupId>net.sf.jasperreports</groupId>
-<artifactId>jasperreports</artifactId>
-<version>6.17.0</version>
-</dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-agroal</artifactId>
+            <version>5.3.8.Final</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.1</version>
+        </dependency>
+        <!--  hibernate validator  -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.1.0.Final</version>
+        </dependency>
+        <!--  Driver Postgresql  -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>10.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.17.0</version>
+        </dependency>
         <dependency>
             <groupId>br.edu.ifsul</groupId>
             <artifactId>PW5-Model</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.18.1</version>
+        </dependency>  
     </dependencies>
-     <build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
