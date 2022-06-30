@@ -65,7 +65,7 @@ public class ControleClasse implements Serializable{
     
     
     public String listar(){
-        return "/privado/Classe/listar?faces-redirect-true";
+        return "/privado/Classe/listar?faces-redirect=true";
     }
 
     public ClasseDAO<Classe> getDao() {

@@ -36,7 +36,7 @@ public class ControleVoo implements Serializable{
     }
 
     public String listar() {
-        return "/privado/Voo/listar?faces-redirect-true";
+        return "/privado/Voo/listar?faces-redirect=true";
     }
 
     public void novo() {

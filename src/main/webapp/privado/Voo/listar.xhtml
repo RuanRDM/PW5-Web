@@ -69,15 +69,14 @@
                                 title="Editar o objeto de id: #{obj.id}"
                                 update="formEdicao" process="@this"
                                 oncomplete="PF('dlg').show();"/>
-                            <p:commandButton
-                                actionListener="#{controleVoo.excluir(obj.id)}"
-                                icon="pi pi-trash"
-                                update="@form"
-                                process="@this"
-                                title="Remover o objeto de id: #{obj.id}"
-                                onclick="if (!confirm('Deseja remover o objeto de id: #{obj.id}'))
-                                            return false"
-                                />
+                            <p:commandButton actionListener="#{controleUsuario.excluir(obj.nomeUsuario)}"
+                                             icon="pi pi-trash"
+                                             update="@form"
+                                             process="@this"
+                                             title="Remover"
+                                             onclick="if (!confirm('Deseja remover o objeto de id: #{obj.id}'))
+                                                         return false"
+                                             rendered="#{p:ifGranted('ADMINISTRADOR')}"/>                            
                         </div>
                     </p:column>
                 </p:dataTable>

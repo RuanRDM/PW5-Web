@@ -60,7 +60,7 @@ public class ControlePessoa implements Serializable{
     
     
     public String listar(){
-        return "/privado/Pessoa/listar?faces-redirect-true";
+        return "/privado/Pessoa/listar?faces-redirect=true";
     }
 
     public PessoaDAO<Pessoa> getDao() {

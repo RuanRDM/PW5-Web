@@ -68,7 +68,7 @@ public class ControleCidade implements Serializable{
     
     
     public String listar(){
-        return "/privado/Cidade/listar?faces-redirect-true";
+        return "/privado/Cidade/listar?faces-redirect=true";
     }
 
 

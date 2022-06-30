@@ -41,7 +41,7 @@ public class ControleAeroporto implements Serializable{
     }
 
     public String listar() {
-        return "/privado/Aeroporto/listar?faces-redirect-true";
+        return "/privado/Aeroporto/listar?faces-redirect=true";
     }
 
     public void novo() {
