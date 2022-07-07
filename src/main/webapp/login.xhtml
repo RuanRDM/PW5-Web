@@ -23,9 +23,10 @@
                             </div>
                         </f:facet>
                         <p:outputLabel value="Usuário" for="txtUsuario"/>
-                        <p:inputText value="#{controleLogin.usuario}" id="txtUsuario"/>
+                        <p:inputText value="#{controleLogin.usuario}" required="
+                                     true" requiredMessage="Informe o nome de Usuário" id="txtUsuario"/>
                         <p:outputLabel value="Senha: " for="txtSenha"/>
-                        <p:password value="#{controleLogin.senha}" id="txtSenha"/>
+                        <p:password value="#{controleLogin.senha}" required="true" requiredMessage="Informe a senha" id="txtSenha"/>
                     </p:panelGrid>
                 </h:form>
             </div>
