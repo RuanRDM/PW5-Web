@@ -27,10 +27,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                             </p:selectOneRadio>
                             <p:outputLabel value="Periodicidade" for="txtPeriodicidade"/>
                             <p:inputText value="#{controleVoo.objeto.periodicidade}"
-                                          id="txtPeriodicidade"/>
+                                         id="txtPeriodicidade"/>
                             <p:outputLabel value="Tempo Estimado" for="txtTempo"/>
                             <p:inputText value="#{controleVoo.objeto.tempoEstimado}"
-                                          id="txtTempo"/>
+                                         id="txtTempo"/>
                         </p:panelGrid>
                     </div>
                 </p:tab>
@@ -38,8 +38,46 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     <p:textEditor value="#{controleVoo.objeto.descricao}"
                                   secure="false" height="200"/>
                 </p:tab>
-                <p:tab title ="Escalas">
-
+                <p:tab title="Escalas">
+                    <p:dataTable value="#{controleVoo.objeto.aeroportos}"
+                                 var="aer" id="listaAeroportos">
+                        <f:facet name="header">
+                            <p:panelGrid columns="3">
+                                <p:outputLabel value="Aeroportos"/>
+                                <p:selectOneMenu value="#{controleVoo.aeroporto}"
+                                                 id="selectAeroporto">
+                                    <f:converter binding="#{converterAeroporto}"/>
+                                    <f:selectItem noSelectionOption="true"
+                                                  itemLabel="Selecione um registro"/>
+                                    <f:selectItems value="#{controleVoo.daoAeroporto.listaTodos}"
+                                                   var="a" itemLabel="#{a.nome}"/>                                    
+                                </p:selectOneMenu>
+                                <p:commandButton value="Adicionar" 
+                                                 actionListener="#{controleVoo.adicionarAeroporto()}"
+                                                 update="listaAeroportos growl"
+                                                 process="@this selectAeroporto"
+                                                 icon="pi pi-plus"/>
+                            </p:panelGrid>
+                        </f:facet>
+                        <p:column headerText="Nome">
+                            <p:outputLabel value="#{aer.nome}"/>
+                        </p:column>
+                        <p:column headerText="Cidade">
+                            <p:outputLabel value="#{obj.cidade.nome}"/>
+                        </p:column>
+                        <p:column headerText="Operação Noturna">
+                            <p:outputLabel value="#{obj.operacaoNoturna}"/>
+                        </p:column>
+                        <p:column headerText="Ações">
+                            <div align="center">
+                                <p:commandButton 
+                                    actionListener="#{controleVoo.removerAeroporto(aer)}"
+                                    process="@this"
+                                    update="listaAeroportos growl" icon="pi pi-trash"
+                                    title="Remover aeroporto"/>
+                            </div>
+                        </p:column>
+                    </p:dataTable>
                 </p:tab>
                 <p:tab title="Voos Agendados">
                     <p:dataTable value="#{controleVoo.objeto.vooAgendados}"
@@ -52,38 +90,38 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                              process="@this"
                                              oncomplete="PF('dlgVooAgendado').show();"/>
                         </f:facet>
-                            <p:column headerText="ID">
-                                <p:outputLabel value="#{vooagendado.id}"/>
-                            </p:column>
-                            <p:column headerText="Aeronave">
-                                <p:outputLabel value="#{vooagendado.aeronave}"/>
-                            </p:column>
-                            <p:column headerText="Total Passageiros">
-                                <p:outputLabel value="#{vooagendado.totalPassageiros}"/>
-                            </p:column>
-                            <p:column headerText="Data">
-                                <p:outputLabel value="#{vooagendado.data}">
-                                    <f:converter converterId="converterCalendar"/>
-                                </p:outputLabel>
-                            </p:column>
-                            <p:column headerText="Ações">
-                                <div>
-                                    <p:commandButton 
-                                        actionListener="#{controleVoo.alterarVooAgendado(idxVooAgendado)}"
-                                        icon="pi pi-pencil"
-                                        title="Editar"
-                                        update=":formVooAgendado" process="@this"
-                                        oncomplete="PF('dlgVooAgendado').show();"/>
-                                    <p:commandButton actionListener="#{controleVoo.removerVooAgendado(idxVooAgendado)}"
-                                                     icon="pi pi-trash"
-                                                     update="tab:listaVooAgendado growl"
-                                                     process="@this"
-                                                     title="Remover"
-                                                     onclick="if (!confirm('Deseja remover o objeto'))
-                                                         return false"
-                                                     rendered="#{p:ifGranted('ADMINISTRADOR')}"/>                            
-                                </div>
-                            </p:column>
+                        <p:column headerText="ID">
+                            <p:outputLabel value="#{vooagendado.id}"/>
+                        </p:column>
+                        <p:column headerText="Aeronave">
+                            <p:outputLabel value="#{vooagendado.aeronave}"/>
+                        </p:column>
+                        <p:column headerText="Total Passageiros">
+                            <p:outputLabel value="#{vooagendado.totalPassageiros}"/>
+                        </p:column>
+                        <p:column headerText="Data">
+                            <p:outputLabel value="#{vooagendado.data}">
+                                <f:converter converterId="converterCalendar"/>
+                            </p:outputLabel>
+                        </p:column>
+                        <p:column headerText="Ações">
+                            <div>
+                                <p:commandButton 
+                                    actionListener="#{controleVoo.alterarVooAgendado(idxVooAgendado)}"
+                                    icon="pi pi-pencil"
+                                    title="Editar"
+                                    update=":formVooAgendado" process="@this"
+                                    oncomplete="PF('dlgVooAgendado').show();"/>
+                                <p:commandButton actionListener="#{controleVoo.removerVooAgendado(idxVooAgendado)}"
+                                                 icon="pi pi-trash"
+                                                 update="tab:listaVooAgendado growl"
+                                                 process="@this"
+                                                 title="Remover"
+                                                 onclick="if (!confirm('Deseja remover o objeto'))
+                                                                 return false"
+                                                 rendered="#{p:ifGranted('ADMINISTRADOR')}"/>                            
+                            </div>
+                        </p:column>
                     </p:dataTable>
                 </p:tab>
             </p:tabView>

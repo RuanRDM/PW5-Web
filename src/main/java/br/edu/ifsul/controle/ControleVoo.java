@@ -32,12 +32,28 @@ public class ControleVoo implements Serializable{
     private Voo objeto;
     @EJB
     private AeroportoDAO<Aeroporto> daoAeroporto;
+    private Aeroporto aeroporto;
     private VooAgendado vooagendado;
     private Boolean novoVooAgendado;
     
     public ControleVoo() {
 
     }
+    
+    public void removerAeroporto(Aeroporto obj) {
+        objeto.getAeroportos().remove(obj);
+        Util.mensagemInformacao("Aeroporto removida com sucesso!");
+    }
+    
+    public void adicionarAeroporto() {
+        if (!objeto.getAeroportos().contains(aeroporto)) {
+            objeto.getAeroportos().add(getAeroporto());
+            Util.mensagemInformacao("Aeroporto adicionado com sucesso!");
+        } else {
+            Util.mensagemErro("Voo já possui este aeroporto nas escalas");
+        }
+    }
+    
     
     public void novoVooAgendado(){
         vooagendado = new VooAgendado();
@@ -138,6 +154,14 @@ public class ControleVoo implements Serializable{
 
     public void setNovoVooAgendado(Boolean novoVooAgendado) {
         this.novoVooAgendado = novoVooAgendado;
+    }
+
+    public Aeroporto getAeroporto() {
+        return aeroporto;
+    }
+
+    public void setAeroporto(Aeroporto aeroporto) {
+        this.aeroporto = aeroporto;
     }
 
 

@@ -27,9 +27,11 @@ public class VooDAO<TIPO> extends DAOGenerico<Voo> implements Serializable {
         converterOrdem.setListaOrdem(listaOrdem);
     }
     
+    @Override
     public Voo getObjectById(Object id) throws Exception {
         Voo obj = em.find(Voo.class, id);
         obj.getVooAgendados().size();
+        obj.getAeroportos().size();
         return obj;
     }
 }
