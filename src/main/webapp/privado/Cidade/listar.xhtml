@@ -65,7 +65,7 @@
                                              title="Editar o objeto de id: #{obj.id}"
                                              update="formEdicao" process="@this"
                                              oncomplete="PF('dlg').show();"/>
-                            <p:commandButton actionListener="#{controleUsuario.excluir(obj.nomeUsuario)}"
+                            <p:commandButton actionListener="#{controleCidade.excluir(obj.id)}"
                                              icon="pi pi-trash"
                                              update="@form"
                                              process="@this"

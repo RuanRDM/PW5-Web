@@ -8,6 +8,7 @@ package br.edu.ifsul.controle;
 import br.edu.ifsul.dao.AeroportoDAO;
 import br.edu.ifsul.dao.VooDAO;
 import br.edu.ifsul.dao.CidadeDAO;
+import br.edu.ifsul.dao.VooAgendadoDAO;
 import br.edu.ifsul.modelo.Aeroporto;
 import br.edu.ifsul.modelo.Voo;
 import java.io.Serializable;
@@ -16,6 +17,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import br.edu.ifsul.util.Util;
 import br.edu.ifsul.modelo.Cidade;
+import br.edu.ifsul.modelo.VooAgendado;
 
 
 /**
@@ -30,9 +32,33 @@ public class ControleVoo implements Serializable{
     private Voo objeto;
     @EJB
     private AeroportoDAO<Aeroporto> daoAeroporto;
-
+    private VooAgendado vooagendado;
+    private Boolean novoVooAgendado;
+    
     public ControleVoo() {
 
+    }
+    
+    public void novoVooAgendado(){
+        vooagendado = new VooAgendado();
+        novoVooAgendado = true;
+    }
+    
+    public void alterarVooAgendado(int index){
+        vooagendado = objeto.getVooAgendados().get(index);
+        novoVooAgendado = false;
+    }
+    
+    public void salvarVooAgendado(){
+        if(novoVooAgendado){
+            objeto.adicionarVooAgendado(vooagendado);
+        }
+        Util.mensagemInformacao("Jogador adicionado ou alterado com sucesso!");
+    }
+    
+    public void removerVooAgendado(int index){
+        objeto.removerVooAgendado(index);
+        Util.mensagemInformacao("Jogador removido com sucesso!");
     }
 
     public String listar() {
@@ -96,6 +122,22 @@ public class ControleVoo implements Serializable{
 
     public void setDaoAeroporto(AeroportoDAO<Aeroporto> daoAeroporto) {
         this.daoAeroporto = daoAeroporto;
+    }
+
+    public VooAgendado getVooagendado() {
+        return vooagendado;
+    }
+
+    public void setVooagendado(VooAgendado vooagendado) {
+        this.vooagendado = vooagendado;
+    }
+
+    public Boolean getNovoVooAgendado() {
+        return novoVooAgendado;
+    }
+
+    public void setNovoVooAgendado(Boolean novoVooAgendado) {
+        this.novoVooAgendado = novoVooAgendado;
     }
 
 

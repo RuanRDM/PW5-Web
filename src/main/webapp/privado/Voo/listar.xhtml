@@ -61,6 +61,12 @@
                     <p:column headerText="Ativo">
                         <p:outputLabel value="#{obj.ativo}"/>
                     </p:column>
+                    <p:column headerText="Periodicidade">
+                        <p:outputLabel value="#{obj.periodicidade}"/>
+                    </p:column>
+                    <p:column headerText="Tempo Estimado">
+                        <p:outputLabel value="#{obj.tempoEstimado}"/>
+                    </p:column>
                     <p:column headerText="Ações">
                         <div>
                             <p:commandButton 
@@ -69,7 +75,7 @@
                                 title="Editar o objeto de id: #{obj.id}"
                                 update="formEdicao" process="@this"
                                 oncomplete="PF('dlg').show();"/>
-                            <p:commandButton actionListener="#{controleUsuario.excluir(obj.nomeUsuario)}"
+                            <p:commandButton actionListener="#{controleVoo.excluir(obj.id)}"
                                              icon="pi pi-trash"
                                              update="@form"
                                              process="@this"

@@ -20,23 +20,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                             <p:outputLabel value="ID" for="txtId"/>
                             <p:inputText value="#{controleVoo.objeto.id}"
                                          readonly="true" size="5" id="txtId"/>
-                            <p:outputLabel value="Escalas" for="selectEscalas"/>
-                            <p:selectOneMenu value="#{controleVoo.objeto.escalas}"
-                                             id="selectEscalas"
-                                             filter="true"
-                                             filterMatchMode="startsWith">
-                                <f:selectItem noSelectionOption="true"
-                                              itemLabel="Selecione um registro"/>
-                                <f:converter binding="#{converterAeroporto}"/>
-                                <f:selectItems 
-                                    value="#{controleVoo.daoAeroporto.listaTodos}"
-                                    var="aero" itemLabel="#{aero.nome}"/>
-                            </p:selectOneMenu>
                             <p:outputLabel value="Ativo" for="txtAtivo"/>
                             <p:selectOneRadio id="txtAtivo" value="#{controleVoo.objeto.ativo}" >
                                 <f:selectItem itemLabel="true" itemValue="true" />
                                 <f:selectItem itemLabel="false" itemValue="false" />
                             </p:selectOneRadio>
+                            <p:outputLabel value="Periodicidade" for="txtPeriodicidade"/>
+                            <p:inputText value="#{controleVoo.objeto.periodicidade}"
+                                          id="txtPeriodicidade"/>
+                            <p:outputLabel value="Tempo Estimado" for="txtTempo"/>
+                            <p:inputText value="#{controleVoo.objeto.tempoEstimado}"
+                                          id="txtTempo"/>
                         </p:panelGrid>
                     </div>
                 </p:tab>
@@ -44,8 +38,53 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     <p:textEditor value="#{controleVoo.objeto.descricao}"
                                   secure="false" height="200"/>
                 </p:tab>
-                <p:tab title ="Aeroportos">
+                <p:tab title ="Escalas">
 
+                </p:tab>
+                <p:tab title="Voos Agendados">
+                    <p:dataTable value="#{controleVoo.objeto.vooAgendados}"
+                                 var="vooagendado" id="listaVooAgendado" rowIndexVar="idxVooAgendado">
+                        <f:facet name="header">
+                            <p:commandButton value="Novo Voo Agendado"
+                                             actionListener="#{controleVoo.novoVooAgendado()}"
+                                             update=":formVooAgendado"
+                                             icon="pi pi=plus"
+                                             process="@this"
+                                             oncomplete="PF('dlgVooAgendado').show();"/>
+                        </f:facet>
+                            <p:column headerText="ID">
+                                <p:outputLabel value="#{vooagendado.id}"/>
+                            </p:column>
+                            <p:column headerText="Aeronave">
+                                <p:outputLabel value="#{vooagendado.aeronave}"/>
+                            </p:column>
+                            <p:column headerText="Total Passageiros">
+                                <p:outputLabel value="#{vooagendado.totalPassageiros}"/>
+                            </p:column>
+                            <p:column headerText="Data">
+                                <p:outputLabel value="#{vooagendado.data}">
+                                    <f:converter converterId="converterCalendar"/>
+                                </p:outputLabel>
+                            </p:column>
+                            <p:column headerText="Ações">
+                                <div>
+                                    <p:commandButton 
+                                        actionListener="#{controleVoo.alterarVooAgendado(idxVooAgendado)}"
+                                        icon="pi pi-pencil"
+                                        title="Editar"
+                                        update=":formVooAgendado" process="@this"
+                                        oncomplete="PF('dlgVooAgendado').show();"/>
+                                    <p:commandButton actionListener="#{controleVoo.removerVooAgendado(idxVooAgendado)}"
+                                                     icon="pi pi-trash"
+                                                     update="tab:listaVooAgendado growl"
+                                                     process="@this"
+                                                     title="Remover"
+                                                     onclick="if (!confirm('Deseja remover o objeto'))
+                                                         return false"
+                                                     rendered="#{p:ifGranted('ADMINISTRADOR')}"/>                            
+                                </div>
+                            </p:column>
+                    </p:dataTable>
                 </p:tab>
             </p:tabView>
 
@@ -61,6 +100,32 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
             </p:panel>
         </h:form>
     </p:dialog>
+    <p:dialog header="Edição de Voos Agendados" widgetVar="dlgVooAgendado" resizable="false" modal="true">
+        <h:form id="formVooAgendado">
+            <p:growl/>
+            <p:panelGrid columns="2">
+                <f:facet name="footer">
+                    <div align="center">
+                        <p:commandButton value="Salvar" icon="pi pi-save"
+                                         actionListener="#{controleVoo.salvarVooAgendado()}"
+                                         update="tab:listaVooAgendado growl"
+                                         process="@form"
+                                         oncomplete="if(!args.validationFailed){PF('dlgVooAgendado').hide();}"/>                    
+                    </div>      
+                </f:facet>
+                <p:outputLabel value="ID"/>
+                <p:inputText value="#{controleVoo.vooagendado.id}" readonly="true"/>
+                <p:outputLabel value="Nome" for="txtAeronave"/>
+                <p:inputText value="#{controleVoo.vooagendado.aeronave}" id="txtAeronave" placeholder="Obrigatório" size="50" maxlength="50"/>
+                <p:outputLabel value="Total Passageiros" for="txtPassageiros"/>
+                <p:inputText value="#{controleVoo.vooagendado.totalPassageiros}" id="txtPassageiros" size="10"/>
+                <p:outputLabel value="Data" for="txtData"/>
+                <p:calendar id="txtData" value="#{controleVoo.vooagendado.data}" mask="true" pattern="dd/MM/yyyy" navigator="true" size="10">
+                    <f:converter converterId="converterCalendar" />
+                </p:calendar>
+            </p:panelGrid>
+        </h:form>
+        <ui:include src="/templates/ajaxstatus.xhtml" />
+    </p:dialog>
 </html>
 
-                            

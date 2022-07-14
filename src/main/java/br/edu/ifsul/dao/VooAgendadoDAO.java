@@ -4,7 +4,7 @@
  */
 package br.edu.ifsul.dao;
 
-import br.edu.ifsul.modelo.Voo;
+import br.edu.ifsul.modelo.VooAgendado;
 import java.io.Serializable;
 import javax.ejb.Stateful;
 
@@ -13,11 +13,11 @@ import javax.ejb.Stateful;
  * @author ruan_
  */
 @Stateful
-public class VooDAO<TIPO> extends DAOGenerico<Voo> implements Serializable {
+public class VooAgendadoDAO<TIPO> extends DAOGenerico<VooAgendado> implements Serializable {
     
-    public VooDAO(){
+    public VooAgendadoDAO(){
         super();
-        classePersistente = Voo.class;
+        classePersistente = VooAgendado.class;
         //lista ordenações possiveis
         listaOrdem.add(new Ordem("id", "ID", "="));
         //ordemAtual
@@ -25,11 +25,5 @@ public class VooDAO<TIPO> extends DAOGenerico<Voo> implements Serializable {
         // inicicalizar o conversor de ordem com a lista de ordens
         converterOrdem = new ConverterOrdem();
         converterOrdem.setListaOrdem(listaOrdem);
-    }
-    
-    public Voo getObjectById(Object id) throws Exception {
-        Voo obj = em.find(Voo.class, id);
-        obj.getVooAgendados().size();
-        return obj;
     }
 }
